@@ -1,5 +1,19 @@
 services:
+    DoctrineEnumMigration\Tools\EnumComparator: ~
+
+    DoctrineEnumMigration\Manager\EnumMigrationManager:
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
+
+    DoctrineEnumMigration\Service\EnumMigrationService:
+        arguments:
+            - '@DoctrineEnumMigration\Tools\EnumComparator'
+            - '@DoctrineEnumMigration\Manager\EnumMigrationManager'
+
+
     doctrine.schema_update_command:
         class: '%doctrine_enum_migration.command_class%'
         tags:
             - { name: console.command, command: doctrine:schema:update }
+        calls:
+            - ['setEnumMigrationService', [ '@DoctrineEnumMigration\Service\EnumMigrationService' ]]

@@ -5,24 +5,17 @@ declare(strict_types=1);
 namespace DoctrineEnumMigration\Service;
 
 use Doctrine\DBAL\Types\Type;
-use App\Type\AbstractEnumType;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManagerInterface;
-
 use DoctrineEnumMigration\Dto\EnumColumnDto;
-use DoctrineEnumMigration\Exception\DoctrineEnumMigrationException;
+use DoctrineEnumMigration\Tools\EnumComparator;
 use DoctrineEnumMigration\Interfaces\EnumTypeInterface;
 use DoctrineEnumMigration\Manager\EnumMigrationManager;
-use DoctrineEnumMigration\Tools\EnumComparator;
+use DoctrineEnumMigration\Exception\DoctrineEnumMigrationException;
+
 use function get_class;
 
 class EnumMigrationService
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
     /**
      * @var EnumComparator
      */
@@ -34,11 +27,9 @@ class EnumMigrationService
     private $manager;
 
     public function __construct(
-        EntityManagerInterface $em,
         EnumComparator $enumComparator,
         EnumMigrationManager $manager
     ) {
-        $this->em = $em;
         $this->enumComparator = $enumComparator;
         $this->manager = $manager;
     }
@@ -90,10 +81,10 @@ class EnumMigrationService
      */
     private function makeFreshEnumColumnDtoList(array $currentEnumTypeList): array
     {
-        $databasePlatform = $this->em->getConnection()->getDatabasePlatform();
+        $databasePlatform = $this->manager->getConnection()->getDatabasePlatform();
 
         /** @var ClassMetadata[] $metadataList */
-        $metadataList = $this->em->getMetadataFactory()->getAllMetadata();
+        $metadataList = $this->manager->getMetadataFactory()->getAllMetadata();
 
         $freshEnumColumnDtoList = [];
 
@@ -136,7 +127,7 @@ class EnumMigrationService
      */
     private function makeCurrentEnumColumnDtoList(): array
     {
-        $schemaManager = $this->em->getConnection()->getSchemaManager();
+        $schemaManager = $this->manager->getConnection()->getSchemaManager();
         $currentEnumList = $this->manager->getCurrentEnumList();
 
         $freshEnumColumnDtoList = [];

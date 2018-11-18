@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace DoctrineEnumMigration\Manager;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
 
 class EnumMigrationManager
 {
     /**
      * @var EntityManagerInterface
      */
-    protected $em;
+    private $em;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -41,5 +43,15 @@ class EnumMigrationManager
 
 
         return $stmt->fetchAll();
+    }
+
+    public function getConnection(): Connection
+    {
+        return $this->em->getConnection();
+    }
+
+    public function getMetadataFactory(): ClassMetadataFactory
+    {
+        return $this->em->getMetadataFactory();
     }
 }

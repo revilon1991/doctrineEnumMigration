@@ -19,16 +19,6 @@ trait EnumMigrationCommandTrait
      */
     private $enumMigrationService;
 
-    /**
-     * @required
-     *
-     * @param EnumMigrationService $enumMigrationService
-     */
-    public function dependencyInjection(EnumMigrationService $enumMigrationService): void
-    {
-        $this->enumMigrationService = $enumMigrationService;
-    }
-
     protected function executeSchemaCommand(
         InputInterface $input,
         OutputInterface $output,
@@ -70,5 +60,10 @@ trait EnumMigrationCommandTrait
             $metadataList,
             $symfonyStyle
         );
+    }
+
+    public function setEnumMigrationService(EnumMigrationService $enumMigrationService): void
+    {
+        $this->enumMigrationService = $enumMigrationService;
     }
 }
