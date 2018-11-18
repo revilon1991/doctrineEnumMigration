@@ -1,0 +1,5 @@
+services:
+    doctrine.schema_update_command:
+        class: DoctrineEnumMigration\Command\UpdateSchemaCommand
+        tags:
+            - { name: console.command, command: doctrine:schema:update }
