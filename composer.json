@@ -6,7 +6,6 @@
   "license":     "proprietary",
 
   "require": {
-    "roave/security-advisories": "dev-master",
     "php":        "~7.1",
     "doctrine/doctrine-bundle": "^1.6.10",
     "doctrine/orm": "^2.5.11"
