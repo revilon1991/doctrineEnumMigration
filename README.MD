@@ -61,6 +61,40 @@ class AppKernel extends Kernel
 }
 ```
 
+Конфигурация
+------------
+
+1) Все custom doctrine типы в вашем приложении обусловленные как enum должны реализовывать интерфейс
+
+```
+DoctrineEnumMigration\Interfaces\EnumTypeInterface
+```
+
+
+
+2) (Опционально) По умолчанию команда(doctrine:schema:update) уже реализована, но если вам нужно использовать свою,
+то переопределите значения из примера ниже и используйте в своем классе
+trait DoctrineEnumMigration\Traits\EnumMigrationCommandTrait:
+
+```yaml
+# app/config/config.yml
+doctrine_enum_migration:
+    command_class: App\Command\CustomUpdateCommand
+```
+
+Использование
+-------------
+
+just run.
+
+```
+php bin/console doctrine:schema:update --force
+```
+or
+```
+php bin/console doctrine:schema:update --dump-sql
+```
+
 Лицензия
 --------
 

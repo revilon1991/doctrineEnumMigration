@@ -4,16 +4,24 @@
   "type":        "symfony-bundle",
   "keywords":    ["symfony-bundle", "enum", "types"],
   "license":     "proprietary",
+  "authors": [
+      {"name": "Evgeniy Kuznetsov", "email": "revil-on@mail.ru", "homepage": "https://9ek.ru/"}
+  ],
 
   "require": {
-    "php":        "~7.1",
-    "doctrine/doctrine-bundle": "^1.6.10",
-    "doctrine/orm": "^2.5.11"
+      "php":                              "~7.1",
+      "ext-pdo":                          "*",
+      "doctrine/doctrine-bundle":         "~1.5",
+      "doctrine/orm":                     "~2.4",
+      "symfony/yaml":                     "~2.8|~3.0|~4.0",
+      "symfony/console":                  "~2.8|~3.0|~4.0",
+      "symfony/dependency-injection":     "~2.8|~3.0|~4.0",
+      "symfony/config":                   "~2.8|~3.0|~4.0"
   },
 
   "autoload": {
-    "psr-4": {
-      "DoctrineEnumMigration\\": ""
-    }
+      "psr-4": {
+          "DoctrineEnumMigration\\": ""
+      }
   }
 }

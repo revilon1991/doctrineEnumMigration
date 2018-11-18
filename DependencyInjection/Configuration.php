@@ -18,11 +18,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->enumNode('enable')
-                    ->values([true, false])
-                    ->defaultValue(false)
-                ->end()
-                ->enumNode('command_class')
+                ->scalarNode('command_class')
                     ->defaultValue(UpdateSchemaCommand::class)
                 ->end()
             ->end()

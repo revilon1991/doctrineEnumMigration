@@ -1,5 +1,5 @@
 services:
     doctrine.schema_update_command:
-        class: DoctrineEnumMigration\Command\UpdateSchemaCommand
+        class: '%doctrine_enum_migration.command_class%'
         tags:
             - { name: console.command, command: doctrine:schema:update }

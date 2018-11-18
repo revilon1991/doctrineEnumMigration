@@ -7,12 +7,28 @@ use DoctrineEnumMigration\Tools\EnumSchemaTool;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use DoctrineEnumMigration\Service\EnumMigrationService;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand;
 use DoctrineEnumMigration\Exception\DoctrineEnumMigrationException;
 
 trait EnumMigrationCommandTrait
 {
+    /**
+     * @var EnumMigrationService
+     */
+    private $enumMigrationService;
+
+    /**
+     * @required
+     *
+     * @param EnumMigrationService $enumMigrationService
+     */
+    public function dependencyInjection(EnumMigrationService $enumMigrationService): void
+    {
+        $this->enumMigrationService = $enumMigrationService;
+    }
+
     protected function executeSchemaCommand(
         InputInterface $input,
         OutputInterface $output,

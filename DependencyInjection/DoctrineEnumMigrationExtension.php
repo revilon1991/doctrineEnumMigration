@@ -17,7 +17,6 @@ class DoctrineEnumMigrationExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('doctrine_enum_migration.enable', $config['enable']);
         $container->setParameter('doctrine_enum_migration.command_class', $config['command_class']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
